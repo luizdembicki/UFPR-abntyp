@@ -5,7 +5,7 @@
 #import "../templates/technical-report.typ": relatorio
 #import "../templates/research-project.typ": projeto-pesquisa
 #import "../institutions/ufpr/cover.typ": capa-ufpr
-#import "../elements/title-page.typ": folha-rosto
+#import "../elements/title-page.typ": folha-aprovacao, folha-rosto
 
 /// Preset reutilizável UFPR.
 /// Uso:
@@ -31,6 +31,11 @@
   espaco-autor-titulo-capa: 0.7fr,
   espaco-titulo-rodape-capa: 1.8fr,
   incluir-folha-rosto: true,
+  incluir-folha-aprovacao: false,
+  banca-aprovacao: (),
+  data-aprovacao: none,
+  modalidade-defesa: none,
+  texto-aprovacao: none,
   body,
 ) = {
   show: abntcc.with(
@@ -60,6 +65,57 @@
   if incluir-folha-rosto {
     folha-rosto()
   }
+
+  if incluir-folha-aprovacao {
+    folha-aprovacao(
+      banca: banca-aprovacao,
+      data-aprovacao: data-aprovacao,
+      modalidade-defesa: modalidade-defesa,
+      texto-aprovacao: texto-aprovacao,
+    )
+  }
+
+  body
+}
+
+/// Preset UFPR específico para TESE.
+///
+/// Mantém `ufprcc` como base, mas ativa por padrão a folha de aprovação
+/// com texto apropriado para doutorado.
+#let ufpr-tese(
+  texto-aprovacao: [
+    Tese aprovada como requisito parcial para obtenção do título de Doutor,
+    no Programa de Pós-Graduação da Universidade Federal do Paraná.
+  ],
+  body,
+  ..args,
+) = {
+  show: ufprcc.with(
+    incluir-folha-aprovacao: true,
+    texto-aprovacao: texto-aprovacao,
+    ..args,
+  )
+
+  body
+}
+
+/// Preset UFPR específico para TCC.
+///
+/// Mantém `ufprcc` como base, mas ativa por padrão a folha de aprovação
+/// com texto apropriado para conclusão de curso.
+#let ufpr-tcc(
+  texto-aprovacao: [
+    Trabalho de Conclusão de Curso aprovado como requisito parcial para
+    obtenção do grau correspondente na Universidade Federal do Paraná.
+  ],
+  body,
+  ..args,
+) = {
+  show: ufprcc.with(
+    incluir-folha-aprovacao: true,
+    texto-aprovacao: texto-aprovacao,
+    ..args,
+  )
 
   body
 }

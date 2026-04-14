@@ -18,8 +18,8 @@
   palavras-chave-en: ("Keyword 1", "Keyword 2", "Keyword 3"),
 )
 
-// Preset acadêmico UFPR com fundo de capa institucional.
-#show: ufprcc.with(
+// Preset específico de TCC, com folha de aprovação ativa por padrão.
+#show: ufpr-tcc.with(
   fonte: "Times New Roman",
   // O fundo usa automaticamente src/institutions/ufpr/capaufpr.png
   usar-fundo-capa: true,
@@ -34,14 +34,17 @@
   // espaco-titulo-rodape-capa: 1.7fr,
   // Para suprimir o fundo institucional, use:
   // usar-fundo-capa: false,
+  data-aprovacao: "14 de abril de 2026",
+  banca-aprovacao: (
+    (nome: "Prof. Dr. Nome do Orientador", instituicao: "UFPR", papel: "Orientador"),
+    (nome: "Profa. Dra. Membro Interno", instituicao: "UFPR", papel: "Membro interno"),
+    (nome: "Prof. Dr. Membro Externo", instituicao: "IFPR", papel: "Membro externo"),
+  ),
 )
 
 // Resumo e abstract usados para validar a estrutura pré-textual.
 #resumo[
   Resumo do trabalho em parágrafo único.
-]
-#resumo-en[
-  Abstract in one paragraph.
 ]
 #resumo-en[
   Abstract in one paragraph.

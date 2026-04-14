@@ -18,9 +18,16 @@
   palavras-chave-en: ("Keyword 1", "Keyword 2", "Keyword 3"),
 )
 
-// Preset de tese/dissertação com capa UFPR.
-#show: ufprcc.with(
+// Preset específico de tese, com folha de aprovação ativa por padrão.
+#show: ufpr-tese.with(
   usar-fundo-capa: true,
+  data-aprovacao: "14 de abril de 2026",
+  modalidade-defesa: "Videoconferência",
+  banca-aprovacao: (
+    (nome: "Prof. Dr. Nome do Orientador", instituicao: "UFPR", papel: "Orientador"),
+    (nome: "Profa. Dra. Membro Interno", instituicao: "UFPR", papel: "Membro interno"),
+    (nome: "Prof. Dr. Membro Externo", instituicao: "UTFPR", papel: "Membro externo"),
+  ),
 )
 
 // Resumo e abstract para validar a pré-textual da tese.
@@ -33,10 +40,6 @@
 ]
 
 // Sumário automático.
-#resumo-en[
-  Abstract in one paragraph.
-  // Paginação textual do documento.
-]
 
 #sumario()
 

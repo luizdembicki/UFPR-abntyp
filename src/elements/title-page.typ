@@ -132,6 +132,149 @@
   pagebreak()
 }
 
+/// Folha de aprovação conforme manual UFPR (seção 4.7)
+///
+/// Elemento obrigatório para trabalhos acadêmicos, com layout customizável
+/// conforme coordenação do curso.
+#let folha-aprovacao(
+  autor: none,
+  titulo: none,
+  subtitulo: none,
+  natureza: none,
+  objetivo: none,
+  instituicao: none,
+  area: none,
+  orientador: none,
+  banca: (), // tupla de membros: ("Nome") ou (nome: "...", instituicao: "...", papel: "...")
+  local: none,
+  data-aprovacao: none,
+  modalidade-defesa: none, // ex.: "Videoconferência"
+  texto-aprovacao: none,
+  titulo-folha: "FOLHA DE APROVAÇÃO",
+  mostrar-linha-assinatura: true,
+) = {
+  set page(numbering: none)
+
+  context {
+    let autor = metadata._resolve(autor, "autor")
+    let titulo = metadata._resolve(titulo, "titulo")
+    let subtitulo = metadata._resolve(subtitulo, "subtitulo")
+    let natureza = metadata._resolve(natureza, "natureza")
+    let objetivo = metadata._resolve(objetivo, "objetivo")
+    let instituicao = metadata._resolve(instituicao, "instituicao")
+    let area = metadata._resolve(area, "area")
+    let orientador = metadata._resolve(orientador, "orientador")
+    let local = metadata._resolve(local, "local")
+
+    align(center)[
+      #text(weight: "bold", size: 12pt)[#upper(titulo-folha)]
+    ]
+
+    v(1.5em)
+
+    if autor != none {
+      align(center)[
+        #text(size: 12pt)[#upper(autor)]
+      ]
+      v(1.5em)
+    }
+
+    if titulo != none {
+      align(center)[
+        #if subtitulo != none {
+          text(weight: "bold", size: 12pt)[#upper(titulo + ": " + subtitulo)]
+        } else {
+          text(weight: "bold", size: 12pt)[#upper(titulo)]
+        }
+      ]
+      v(1.5em)
+    }
+
+    align(right)[
+      #box(width: 8cm)[
+        #set align(left)
+        #set text(size: 10pt)
+        #set par(
+          leading: 1em * 0.65,
+          first-line-indent: 0pt,
+          justify: true,
+        )
+
+        #if texto-aprovacao != none {
+          texto-aprovacao
+        } else {
+          [Trabalho aprovado como #if natureza != none { natureza } else { [trabalho acadêmico] }
+            #if objetivo != none { [ #objetivo] }.
+            #if instituicao != none {
+              linebreak()
+              [Instituição: #instituicao]
+            }
+            #if area != none {
+              linebreak()
+              [Área de concentração: #area]
+            }]
+        }
+
+        #if modalidade-defesa != none {
+          linebreak()
+          linebreak()
+          [Modalidade da defesa: #modalidade-defesa.]
+        }
+      ]
+    ]
+
+    v(2cm)
+
+    let orient = if orientador != none {
+      ((nome: orientador, instituicao: instituicao, papel: "Orientador(a)"),)
+    } else {
+      ()
+    }
+    let participantes = orient + banca
+
+    for participante in participantes {
+      if mostrar-linha-assinatura {
+        align(center)[#line(length: 9cm, stroke: 0.5pt)]
+      }
+
+      v(0.2cm)
+
+      if type(participante) == dictionary {
+        align(center)[
+          #text(size: 10pt)[#participante.at("nome", default: "")]
+          #if participante.at("papel", default: none) != none {
+            linebreak()
+            text(size: 10pt)[#participante.at("papel")]
+          }
+          #if participante.at("instituicao", default: none) != none {
+            linebreak()
+            text(size: 10pt)[#participante.at("instituicao")]
+          }
+        ]
+      } else {
+        align(center)[#text(size: 10pt)[#participante]]
+      }
+
+      v(1.2cm)
+    }
+
+    if local != none or data-aprovacao != none {
+      align(center)[
+        #if local != none {
+          text(size: 12pt)[#local]
+          if data-aprovacao != none { [, ] }
+        }
+        #if data-aprovacao != none {
+          text(size: 12pt)[#metadata._str-safe(data-aprovacao)]
+        }
+      ]
+    }
+  }
+
+  pagebreak()
+}
+
 // Aliases curtos
 #let rosto = folha-rosto
 #let ficha = ficha-catalografica
+#let aprovacao = folha-aprovacao

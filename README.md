@@ -71,6 +71,8 @@ Créditos e referência do pacote base:
 ## Presets UFPR disponíveis
 
 - `ufprcc`: trabalhos acadêmicos (TCC, dissertação, tese)
+- `ufpr-tese`: preset específico para tese (com folha de aprovação ativa por padrão)
+- `ufpr-tcc`: preset específico para TCC (com folha de aprovação ativa por padrão)
 - `ufpr-artigo`: artigo científico
 - `ufpr-relatorio`: relatório técnico/científico
 - `ufpr-projeto`: projeto de pesquisa
@@ -96,8 +98,26 @@ Parâmetros adicionais no preset `ufprcc` (todos opcionais e desativados por pad
 - `evitar-heading-orfao`
 - `usar-ponto-e-virgula-palavras-chave`
 - `normalizar-minusculas-palavras-chave`
+- `incluir-folha-aprovacao`
+- `banca-aprovacao`
+- `data-aprovacao`
+- `modalidade-defesa`
+- `texto-aprovacao`
 
 Nota: `usar-numeracao-verso` mantém o controle da numeração habilitado para o fluxo UFPR, mas o alinhamento alternado automático por paridade depende de suporte nativo do Typst ainda indisponível nesta versão.
+
+Exemplo de uso da folha de aprovação:
+
+```typst
+#show: ufpr-tese.with(
+  data-aprovacao: "14 de abril de 2026",
+  modalidade-defesa: "Videoconferência",
+  banca-aprovacao: (
+    (nome: "Profa. Dra. Maria Exemplo", instituicao: "UFPR", papel: "Membro interno"),
+    (nome: "Prof. Dr. João Externo", instituicao: "UTFPR", papel: "Membro externo"),
+  ),
+)
+```
 
 ## Exemplos UFPR
 
