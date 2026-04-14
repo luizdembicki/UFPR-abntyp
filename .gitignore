@@ -5,6 +5,7 @@
 
 # Typst output
 *.pdf
+*.out.txt
 
 # Editor
 .vscode/

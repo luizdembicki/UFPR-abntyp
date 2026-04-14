@@ -2,6 +2,7 @@
 
 #import "../lib.typ": *
 
+// Metadados institucionais que alimentam a capa e a folha de rosto.
 #show: dados-ufpr.with(
   titulo: "Título do trabalho",
   subtitulo: [Subtítulo opcional],
@@ -17,6 +18,7 @@
   palavras-chave-en: ("Keyword 1", "Keyword 2", "Keyword 3"),
 )
 
+// Preset acadêmico UFPR com fundo de capa institucional.
 #show: ufprcc.with(
   fonte: "Times New Roman",
   // O fundo usa automaticamente src/institutions/ufpr/capaufpr.png
@@ -34,14 +36,21 @@
   // usar-fundo-capa: false,
 )
 
+// Resumo e abstract usados para validar a estrutura pré-textual.
 #resumo[
   Resumo do trabalho em parágrafo único.
 ]
 #resumo-en[
   Abstract in one paragraph.
 ]
+#resumo-en[
+  Abstract in one paragraph.
+]
+
+// Sumário automático do TCC.
 #sumario()
 
+// Paginação textual da parte principal.
 #counter(page).update(1)
 #set page(numbering: "1", number-align: top + right)
 
@@ -49,6 +58,7 @@
 
 Conteúdo de exemplo.
 
+// Referências ao final do TCC.
 #heading(level: 1, numbering: none, "REFERÊNCIAS")
 
 SOBRENOME, Nome. *Título*. Curitiba: Editora, 2026.

@@ -109,7 +109,7 @@ A pasta `examples/` contém apenas exemplos UFPR:
 - `ufpr-artigo-exemplo.typ`
 - `ufpr-relatorio-exemplo.typ`
 - `ufpr-projeto-exemplo.typ`
-- `ufpr-validacao-completa.typ` (documento completo com citações, imagem, tabela e referências)
+- `ufpr-template-geral.typ` (template geral com citações, imagem, tabela e referências)
 
 ## Estrutura principal
 

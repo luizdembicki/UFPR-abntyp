@@ -1,9 +1,10 @@
-// Tutorial de validação completa da camada UFPR para Typst
+// Template geral UFPR para Typst
 
 #import "../lib.typ": *
 
+// Metadados do trabalho: alimentam capa, folha de rosto e informações institucionais.
 #show: dados-ufpr.with(
-  titulo: "Tutorial de uso e validação do pacote ufpr-abntyp",
+  titulo: "Template geral de uso do pacote ufpr-abntyp",
   subtitulo: [Exemplo guiado com os principais elementos acadêmicos],
   autor: "Nome do Autor",
   faculdade: "Setor de Ciências Exatas",
@@ -23,8 +24,9 @@
   palavras-chave-en: ("UFPR", "ABNT", "Typst", "Standardization"),
 )
 
+// Preset UFPR principal: aplica capa, folhade rosto, bibliografia e opções de formatação.
 #show: ufprcc.with(
-  arquivo-bibliografia: "/examples/ufpr-validacao-completa.bib",
+  arquivo-bibliografia: "/examples/ufpr-template-geral.bib",
   titulo-bibliografia: "REFERÊNCIAS",
   usar-margens-espelhadas: true,
   usar-numeracao-verso: true,
@@ -32,11 +34,13 @@
   usar-ponto-e-virgula-palavras-chave: true,
 )
 
+// Registros para listas automáticas e uso expandido na primeira ocorrência.
 #registrar-sigla("UFPR", "Universidade Federal do Paraná")
 #registrar-abreviacao("ABNT", "Associação Brasileira de Normas Técnicas")
 #registrar-simbolo("α", "Coeficiente de ajuste")
 #registrar-simbolo("β", "Parâmetro de calibração")
 
+// Resumo em português com palavras-chave definidas nos metadados.
 #resumo[
   Este documento apresenta um roteiro prático para validar os principais
   recursos do pacote ufpr-abntyp: capa institucional, folha de rosto,
@@ -44,20 +48,24 @@
   apêndice, anexo e referências finais.
 ]
 
+// Abstract em inglês com a mesma estrutura do resumo principal.
 #resumo-en[
   This document provides a practical guide to validate the main ufpr-abntyp
   features: institutional cover, title page, citations, figures, equations,
   frames, tables, chart, cross-references, appendix, annex and references.
 ]
 
+// Listas pré-textuais geradas automaticamente a partir do conteúdo do documento.
 #lista-ilustracoes()
 #lista-quadros()
 #lista-tabelas()
 #lista-siglas()
 #lista-simbolos()
 
+// Sumário com hierarquia do trabalho.
 #sumario()
 
+// Início da parte textual: ativa paginação arábica para referências por página.
 #counter(page).update(1)
 #set page(numbering: "1", number-align: top + right)
 
@@ -120,6 +128,7 @@ A equação mais famosa da física é dada por #usar-sigla("ABNT"):
   [$E = m c^2$],
 )
 
+// Referência cruzada por página da equação numerada.
 Referência ao resultado: vide @eq-einstein na #ref(<eq-einstein>, form: "page").
 
 Uma equação mais complexa pode ser descrita como:
@@ -147,6 +156,7 @@ A Figura @fig-figura2 é um exemplo de elemento ilustrativo de teste.
   largura: 60%,
 )
 
+// Quadro didático com moldura e fonte/nota.
 == Quadros
 
 O Quadro @qua-prefixos resume convenções de identificação textual.
@@ -176,6 +186,7 @@ O Quadro @qua-prefixos resume convenções de identificação textual.
   nota-texto: "Exemplo didático para validação.",
 )
 
+// Tabela com título, corpo e nota de rodapé textual.
 == Tabelas
 
 A Tabela @tab-validacao usa alinhamento automático à margem esquerda com texto
@@ -209,6 +220,7 @@ justificado.
   nota-texto: "Status de referência para testes manuais.",
 )
 
+// Gráfico em bloco para validar legenda, fonte e referência cruzada.
 == Gráfico
 
 A Figura @fig-grafico mostra um gráfico simples para validar título, fonte,
@@ -281,6 +293,7 @@ Este cenário segue as boas práticas discutidas por @santos2022 e
 A execução deste tutorial confirma o uso do pacote em um cenário completo e
 permite comparar rapidamente o resultado com o padrão esperado pela #usar-sigla("UFPR").
 
+// Apêndice A: itens de checagem rápida do template geral.
 #heading(level: 1, numbering: none, "APÊNDICE A - CHECKLIST DE VALIDAÇÃO") <app-a>
 
 - verificar capa com fundo em página inteira;
@@ -296,6 +309,7 @@ permite comparar rapidamente o resultado com o padrão esperado pela #usar-sigla
 
 Referência ao Apêndice A: página #ref(<app-a>, form: "page").
 
+// Anexo A: resumo sintético dos critérios usados no template geral.
 #heading(level: 1, numbering: none, "ANEXO A - RESUMO DE CRITÉRIOS INSTITUCIONAIS") <anx-a>
 
 - Títulos de figuras e quadros acima do elemento;

@@ -2,6 +2,7 @@
 
 #import "../lib.typ": *
 
+// Metadados do trabalho: alimentam capa, folha de rosto e resumo.
 #show: dados-ufpr.with(
   titulo: "Título da dissertação",
   subtitulo: [Subtítulo opcional],
@@ -17,10 +18,12 @@
   palavras-chave-en: ("Keyword 1", "Keyword 2", "Keyword 3"),
 )
 
+// Preset de dissertação: aplica a capa institucional e a estrutura padrão UFPR.
 #show: ufprcc.with(
   usar-fundo-capa: true,
 )
 
+// Resumo e abstract para validar a parte pré-textual.
 #resumo[
   Resumo da dissertação em parágrafo único.
 ]
@@ -29,8 +32,10 @@
   Abstract in one paragraph.
 ]
 
+// Sumário automático do template.
 #sumario()
 
+// A partir daqui inicia a paginação arábica do conteúdo textual.
 #counter(page).update(1)
 #set page(numbering: "1", number-align: top + right)
 
@@ -38,6 +43,7 @@
 
 Conteúdo de exemplo.
 
+// Seção final de referências no exemplo simplificado.
 #heading(level: 1, numbering: none, "REFERÊNCIAS")
 
 SOBRENOME, Nome. *Título*. Curitiba: Editora, 2026.

@@ -1,8 +1,10 @@
 # Créditos e Agradecimentos
 
+Este repositório é a camada institucional **ufpr-abntyp**, construída sobre o pacote base **ABNTyp** para adaptar a formatação acadêmica à UFPR.
+
 ## abnTeX2
 
-O **ABNTyp** (ABNTyp — Base Normativa Typst) começou como uma adaptação do projeto **[abnTeX2](https://github.com/abntex/abntex2)** (ABsurdas Normas para TeX), o pacote LaTeX para formatação de documentos técnicos e científicos brasileiros em conformidade com as normas ABNT.
+O **ABNTyp** começou como uma adaptação do projeto **[abnTeX2](https://github.com/abntex/abntex2)** (ABsurdas Normas para TeX), o pacote LaTeX para formatação de documentos técnicos e científicos brasileiros em conformidade com as normas ABNT.
 
 O abnTeX2 é mantido por **Lauro César Araujo** e a equipe abnTeX2, e está disponível sob a licença LPPL (LaTeX Project Public License).
 
@@ -55,7 +57,7 @@ E todos os demais contribuidores que tornaram possível a produção de trabalho
 
 ## Uma breve introdução ao LaTeX 2ε
 
-O Capítulo 1 ("Conceitos Básicos") do documento `docs/introducao-abntyp.typ` é baseado no trabalho **"Breve Introdução ao LaTeX 2ε"** do professor **Lenimar Nunes de Andrade**, do Departamento de Matemática da Universidade Federal da Paraíba.
+O conteúdo didático originalmente documentado no repositório foi incorporado ao fluxo de exemplos e materiais de validação do pacote. Esse material é baseado no trabalho **"Breve Introdução ao LaTeX 2ε"** do professor **Lenimar Nunes de Andrade**, do Departamento de Matemática da Universidade Federal da Paraíba.
 
 O trabalho original, disponível em ftp://mat.ufpb.br/pub/textos/tex/, é um tutorial didático que há décadas auxilia estudantes brasileiros a aprenderem LaTeX. O pacote companheiro **[FerrMat](https://github.com/3sdras/ferrmat)** é uma adaptação mais ampla desse mesmo trabalho, cobrindo matemática em português, caixas decorativas e ambientes de teoremas.
 
@@ -65,7 +67,7 @@ O trabalho original, disponível em ftp://mat.ufpb.br/pub/textos/tex/, é um tut
 
 ### Claude Code
 
-O **[Claude Code](https://claude.ai/claude-code)** é uma ferramenta de programação assistida por IA da Anthropic. Todas as versões iniciais do código do ABNTyp, incluindo os templates, funções, documentação e o documento `introducao-abntyp.typ`, foram desenvolvidas via Claude Code (modelo Claude Opus 4.5), bem como boa parte da revisão.
+O **[Claude Code](https://claude.ai/claude-code)** é uma ferramenta de programação assistida por IA da Anthropic. As versões iniciais do código do ABNTyp, incluindo os templates, funções e documentação de apoio, foram desenvolvidas com essa ferramenta, bem como boa parte da revisão.
 
 Agradecemos à equipe da Anthropic pelo desenvolvimento desta ferramenta que potencializa significativamente a produtividade.
 
@@ -102,7 +104,7 @@ Agradecemos à comunidade acadêmica brasileira que utiliza e contribui para fer
 
 Este projeto implementa normas publicadas pela **ABNT (Associação Brasileira de Normas Técnicas)**. As normas são propriedade da ABNT e este projeto apenas implementa suas especificações técnicas para formatação de documentos.
 
-Para acesso às normas oficiais, consulte: https://www.abnt.org.br/
+Para acesso às normas oficiais, consulte: [ABNT](https://www.abnt.org.br/)
 
 ---
 
@@ -118,7 +120,7 @@ Todas as contribuições são bem-vindas e serão devidamente creditadas.
 
 O ABNTyp é distribuído sob a licença **MIT**, que permite uso, modificação e redistribuição livre, desde que mantidos os créditos apropriados.
 
-```
+```text
 MIT License
 
 Copyright (c) 2024-2026 Esdras
@@ -144,4 +146,4 @@ SOFTWARE.
 
 ---
 
-_Última atualização: Janeiro de 2026_
+Última atualização: Abril de 2026

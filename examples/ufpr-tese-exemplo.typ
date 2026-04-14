@@ -2,6 +2,7 @@
 
 #import "../lib.typ": *
 
+// Metadados institucionais da tese.
 #show: dados-ufpr.with(
   titulo: "Título da tese",
   subtitulo: [Subtítulo opcional],
@@ -17,16 +18,24 @@
   palavras-chave-en: ("Keyword 1", "Keyword 2", "Keyword 3"),
 )
 
+// Preset de tese/dissertação com capa UFPR.
 #show: ufprcc.with(
   usar-fundo-capa: true,
 )
 
+// Resumo e abstract para validar a pré-textual da tese.
 #resumo[
   Resumo da tese em parágrafo único.
 ]
 
 #resumo-en[
   Abstract in one paragraph.
+]
+
+// Sumário automático.
+#resumo-en[
+  Abstract in one paragraph.
+  // Paginação textual do documento.
 ]
 
 #sumario()
@@ -38,6 +47,7 @@
 
 Conteúdo de exemplo.
 
+// Referências finais da tese.
 #heading(level: 1, numbering: none, "REFERÊNCIAS")
 
 SOBRENOME, Nome. *Título*. Curitiba: Editora, 2026.
