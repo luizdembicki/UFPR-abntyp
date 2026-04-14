@@ -1,0 +1,376 @@
+             UNIVERSIDADE FEDERAL DO PARANÁ
+                SETOR DE CIÊNCIAS EXATAS
+            PROGRAMA DE PÓS-GRADUAÇÃO EM ...
+
+
+
+
+                     NOME DO AUTOR
+
+
+
+
+TUTORIAL DE USO E VALIDAÇÃO DO PACOTE UFPR-ABNTYP:
+    Exemplo guiado com os principais elementos acadêmicos
+
+
+
+
+                        CURITIBA
+                          2026
+                     NOME DO AUTOR
+
+
+
+
+TUTORIAL DE USO E VALIDAÇÃO DO PACOTE UFPR-ABNTYP:
+    Exemplo guiado com os principais elementos acadêmicos
+
+
+
+
+                            Trabalho apresentado ao Programa de Pós-Graduação em
+                            … da Universidade Federal do Paraná, como requisito
+                            parcial para aprovação na disciplina de Metodologia.
+
+
+
+                            Orientador: Prof. Dr. Nome do Orientador
+
+
+                            Coorientadora: Profa. Dra. Nome da Coorientadora
+
+
+
+
+                        CURITIBA
+                          2026
+                                           RESUMO
+
+
+Este documento apresenta um roteiro prático para validar os principais recursos do pacote ufpr-
+-abntyp: capa institucional, folha de rosto, citações, figuras, equações, quadros, tabelas, gráfico,
+referências cruzadas, apêndice, anexo e referências finais.
+
+
+Palavras-chave: UFPR. ABNT. Typst. Normalização.
+                                          ABSTRACT
+
+
+This document provides a practical guide to validate the main ufpr-abntyp features: institutional
+cover, title page, citations, figures, equations, frames, tables, chart, cross-references, appendix,
+annex and references.
+
+
+Keywords: UFPR. ABNT. Typst. Standardization.
+                             LISTA DE ILUSTRAÇÕES
+
+
+FIGURA 1 – FACHADA INSTITUCIONAL UTILIZADA NO FUNDO DA CAPA . . . . . . . 3
+FIGURA 2 – EXEMPLO ADICIONAL DE IMAGEM INSTITUCIONAL . . . . . . . . . . . . . . . . 5
+FIGURA 3 – DISTRIBUIÇÃO SIMULADA DE RESULTADOS DE VALIDAÇÃO . . . . . . 7
+                                       LISTA DE QUADROS
+
+
+QUADRO 1 – PREFIXOS DE REFERÊNCIA TEXTUAL . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+                                       LISTA DE TABELAS
+
+
+TABELA 1 – CRITÉRIOS DE VALIDAÇÃO DO PACOTE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+                      LISTA DE ABREVIATURAS E SIGLAS
+
+
+ABNT   Associação Brasileira de Normas Técnicas
+UFPR   Universidade Federal do Paraná
+                              LISTA DE SÍMBOLOS
+
+
+α   Coeficiente de ajuste
+β   Parâmetro de calibração
+                                                            SUMÁRIO
+
+
+1         INTRODUÇÃO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+
+2         REVISÃO TEÓRICA . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+2.1       MODELO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+2.1.1     Modelo simplificado . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+2.1.1.1   Modelo simplificado com figuras . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+2.1.1.2   Modelo detalhado . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+
+3         EXPRESSÕES MATEMÁTICAS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+4         UTILIZAÇÃO DO TEMPLATE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+4.1       FIGURAS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+4.2       QUADROS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+4.3       TABELAS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+4.4       GRÁFICO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+5         REFERÊNCIAS CRUZADAS NO TEXTO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+6         DISCUSSÃO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+7         CONCLUSÃO . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+          APÊNDICE A - CHECKLIST DE VALIDAÇÃO . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+          ANEXO A - RESUMO DE CRITÉRIOS INSTITUCIONAIS . . . . . . . . . . . . . 12
+
+          REFERÊNCIAS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+                                                                                        1
+
+
+
+1 INTRODUÇÃO
+
+
+        Este tutorial foi organizado para funcionar como documento de referência rápida na
+configuração de trabalhos acadêmicos da Universidade Federal do Paraná (UFPR).
+        Segundo (Silva, 2023), a padronização textual melhora a consistência editorial e a
+avaliação acadêmica.
+        Neste modelo, as regras da Associação Brasileira de Normas Técnicas (ABNT) já são
+aplicadas de forma automática pelo preset institucional.
+                                                                                         2
+
+
+
+2 REVISÃO TEÓRICA
+
+
+        Este capítulo apresenta a fundamentação teórica e exemplos de uso dos elementos do
+pacote, organizados em seções e subseções até o nível 2.1.1.1 para demonstrar a formatação
+progressiva conforme NBR 6024:2012.
+
+
+2.1 MODELO
+
+
+        Nesta subseção são apresentados os modelos de elementos gráficos e suas variações.
+
+
+2.1.1 Modelo simplificado
+
+
+        O modelo simplificado cobre os casos de uso mais frequentes.
+
+
+2.1.1.1 Modelo simplificado com figuras
+
+
+        A Figura FIGURA 1 demonstra a imagem institucional.
+                                                                                            3
+
+               FIGURA 1 – FACHADA INSTITUCIONAL UTILIZADA NO FUNDO DA CAPA
+
+
+
+
+                                     FONTE: O autor (2026)
+
+
+
+2.1.1.2 Modelo detalhado
+
+
+         A subseção 2.1.1.1 deve aparecer no sumário com numeração e texto em estilo regular,
+sem itálico.
+
+
+2.1.1.2.1 Modelo simplificadíssimo
+
+
+         Este nível continua disponível para cenários mais profundos, mas não precisa aparecer
+no sumário desta validação.
+                                                                                       4
+
+
+
+3 EXPRESSÕES MATEMÁTICAS
+
+
+     Existem duas formas de expressar relações matemáticas: em linha (inline) e em bloco.
+     A equação mais famosa da física é dada por ABNT:
+
+                                     𝐸 = 𝑚𝑐2                                         (1)
+     Referência ao resultado: vide EQUAÇÃO 1 na página 4.
+     Uma equação mais complexa pode ser descrita como:
+                                ∞              √
+                                  {−𝑥2 }         𝜋
+                            ∫ 𝑒          𝑑𝑥 =                                        (2)
+                              0
+                                                2
+                                                                                     5
+
+
+
+4 UTILIZAÇÃO DO TEMPLATE
+
+
+        Nesta seção são apresentados exemplos práticos equivalentes ao uso cotidiano do
+pacote: inserção de figura, quadro, tabela e gráfico com referências cruzadas.
+
+
+4.1 FIGURAS
+
+
+        A Figura FIGURA 2 é um exemplo de elemento ilustrativo de teste.
+                FIGURA 2 – EXEMPLO ADICIONAL DE IMAGEM INSTITUCIONAL
+
+
+
+
+                                       FONTE: O autor (2026)
+                           NOTA: Esta é uma figura de teste para validação.
+
+
+
+4.2 QUADROS
+
+
+        O Quadro QUADRO 1 resume convenções de identificação textual.
+                                                                                                         6
+
+                           QUADRO 1 – PREFIXOS DE REFERÊNCIA TEXTUAL
+              Elemento                                      Prefixo recomendado
+               Figura                                               fig-…
+               Tabela                                               tab-…
+               Quadro                                              qua-…
+              Apêndice                                             app-…
+               Anexo                                               anx-…
+
+                                           FONTE: O autor (2026)
+                                   NOTA: Exemplo didático para validação.
+
+
+
+4.3 TABELAS
+
+
+            A Tabela TABELA 1 usa alinhamento automático à margem esquerda com texto justi­
+ficado.
+TABELA 1 – CRITÉRIOS DE VALIDAÇÃO DO PACOTE
+ Critério                                 Status                   Observação
+ Capa UFPR em fundo full-page             Conforme                 Imagem institucional por padrão
+ Folha de rosto editável                  Conforme                 Texto de apresentação definido no ar­
+                                                                   quivo
+ Citações ABNT                            Conforme                 Exemplos de curta, longa e indireta
+ Elementos pós-textuais                   Conforme                 Apêndice e anexo com letras
+
+FONTE: O autor (2026)
+NOTA: Status de referência para testes manuais.
+
+
+
+4.4 GRÁFICO
+
+
+            A Figura FIGURA 3 mostra um gráfico simples para validar título, fonte, nota e
+referência cruzada.
+                                                                7
+
+FIGURA 3 – DISTRIBUIÇÃO SIMULADA DE RESULTADOS DE VALIDAÇÃO
+
+
+
+Resultado A
+
+
+
+          Resultado B
+
+
+
+                    Resultado C
+
+
+
+                              Resultado D
+
+
+
+
+                             FONTE: O autor (2026).
+                    NOTA: Escala visual apenas demonstrativa.
+                                                       8
+
+
+
+5 REFERÊNCIAS CRUZADAS NO TEXTO
+
+
+      Exemplos de referência usados neste documento:
+   • Figura institucional: FIGURA 1.
+   • Figura adicional: FIGURA 2.
+   • Quadro de prefixos: QUADRO 1.
+   • Tabela de critérios: TABELA 1.
+   • Gráfico de resultados: FIGURA 3.
+   • Equação de Einstein: EQUAÇÃO 1.
+   • Equação complexa: EQUAÇÃO 2.
+                                                                                                9
+
+
+
+6 DISCUSSÃO
+
+
+        A estrutura acima cobre os pontos de uso mais recorrentes no fluxo acadêmico: compo­
+sição dos elementos pré-textuais, demonstração de conteúdo textual com hierarquia profunda
+de seções (até 2.1.1.1), exemplos de equações matemáticas, e organização pós-textual.
+        As funções helpers (figura, tabela-simples, quadro-simples, equacao) simplificam
+o uso do pacote, eliminando necessidade de ajustes manuais de formatação.
+        Este cenário segue as boas práticas discutidas por (Santos, 2022) e (Oliveira, 2021).
+                                                                                        10
+
+
+
+7 CONCLUSÃO
+
+
+        A execução deste tutorial confirma o uso do pacote em um cenário completo e permite
+comparar rapidamente o resultado com o padrão esperado pela UFPR.
+                                                                           11
+
+
+
+                 APÊNDICE A - CHECKLIST DE VALIDAÇÃO
+
+
+• verificar capa com fundo em página inteira;
+• verificar folha de rosto com texto de apresentação editável;
+• verificar citações diretas, indiretas e longa;
+• verificar figuras com novo helper;
+• verificar tabelas com novo helper e alinhamento FONTE/NOTA à esquerda;
+• verificar quadros com novo helper;
+• verificar equações numeradas;
+• verificar referências cruzadas;
+• verificar alinhamento de hierarquia até 2.1.1.1;
+• verificar elementos pós-textuais no sumário.
+    Referência ao Apêndice A: página página 11.
+                                                              12
+
+
+
+         ANEXO A - RESUMO DE CRITÉRIOS INSTITUCIONAIS
+
+
+• Títulos de figuras e quadros acima do elemento;
+• Fonte abaixo do elemento, alinhada à esquerda;
+• Tabelas alinhadas à esquerda com conteúdo justificado;
+• FONTE e NOTA de tabelas alinhadas à margem esquerda real;
+• Folha de rosto com bloco de apresentação editável;
+• Apêndice e anexo identificados por letras;
+• Equipações numeradas com referência cruzada;
+• Funções helpers para uso simplificado.
+   Referência ao Anexo A: página página 12.
+                                                                                      13
+
+
+
+                                    REFERÊNCIAS
+
+
+OLIVEIRA, Carlos. Criterios de qualidade em documentacao universitaria. Revista de Norma­
+lizacao Academica, v. 10, n. 2, p. 80–95, 2021.
+SANTOS, Maria. Metodologia cientifica aplicada. 3. ed. Sao Paulo: Atlas, 2022.
+SILVA, Joao. Padronizacao de documentos academicos. Curitiba: Editora Exemplo, 2023.
+

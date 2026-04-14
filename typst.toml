@@ -1,0 +1,11 @@
+[package]
+name = "ufpr-abntyp"
+version = "0.1.0"
+entrypoint = "lib.typ"
+authors = ["Esdras", "UFPR adaptation contributors"]
+license = "MIT"
+description = "UFPR institutional adaptation layer built on top of ABNTyp for Typst academic documents."
+repository = "https://github.com/3sdras/UFPR-abntyp"
+keywords = ["ufpr", "abnt", "tcc", "dissertacao", "tese", "relatorio", "projeto", "typst"]
+categories = ["paper", "thesis", "report"]
+exclude = ["docs/*", "examples/*", "*.pdf", "CREDITS.md", ".gitignore", ".claude/*", ".DS_Store"]

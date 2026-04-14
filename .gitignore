@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Typst output
+*.pdf
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Documentação antiga
+docs/introducao-abntyp-COMPLETO-ANTIGO.typ
+
+# Temporary files
+*.tmp
+*.bak
