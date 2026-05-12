@@ -30,16 +30,15 @@
   let pref-content = if numero-negrito { text(weight: "bold")[#pref] } else { [#pref] }
 
   link(it.element.location())[
-    #h(indent)
-    // Indicativo numérico alinhado à margem esquerda e
-    // título alinhado na mesma coluna para todos os níveis.
-    #box(width: num-width)[
-      #align(left)[#pref-content]
-    ]
-    #h(0.4em)
-    #corpo
-    #box(width: 1fr, it.fill)
-    #it.page()
+    #it.indented(
+      box(width: num-width)[#align(left)[#pref-content]],
+      [
+        #corpo
+        #box(width: 1fr, it.fill)
+        #it.page()
+      ],
+      gap: 0.4em,
+    )
   ]
 }
 

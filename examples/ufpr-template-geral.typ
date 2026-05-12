@@ -1,11 +1,11 @@
 // Template geral UFPR para Typst
+// Demonstra código → resultado para todos os recursos do pacote
 
-#import "../lib.typ": *
+#import "/lib.typ": *
 
-// Metadados do trabalho: alimentam capa, folha de rosto e informações institucionais.
 #show: dados-ufpr.with(
-  titulo: "Template geral de uso do pacote ufpr-abntyp",
-  subtitulo: [Exemplo guiado com os principais elementos acadêmicos],
+  titulo: "Guia de Uso do Pacote ufpr-abntyp",
+  subtitulo: [Estruturado com código e resultado de cada recurso],
   autor: "Nome do Autor",
   faculdade: "Setor de Ciências Exatas",
   programa: "Programa de Pós-Graduação em ...",
@@ -24,7 +24,6 @@
   palavras-chave-en: ("UFPR", "ABNT", "Typst", "Standardization"),
 )
 
-// Preset UFPR principal: aplica capa, folhade rosto, bibliografia e opções de formatação.
 #show: ufprcc.with(
   arquivo-bibliografia: "/examples/ufpr-template-geral.bib",
   titulo-bibliografia: "REFERÊNCIAS",
@@ -34,141 +33,235 @@
   usar-ponto-e-virgula-palavras-chave: true,
 )
 
-// Registros para listas automáticas e uso expandido na primeira ocorrência.
 #registrar-sigla("UFPR", "Universidade Federal do Paraná")
 #registrar-abreviacao("ABNT", "Associação Brasileira de Normas Técnicas")
 #registrar-simbolo("α", "Coeficiente de ajuste")
 #registrar-simbolo("β", "Parâmetro de calibração")
 
-// Resumo em português com palavras-chave definidas nos metadados.
 #resumo[
-  Este documento apresenta um roteiro prático para validar os principais
-  recursos do pacote ufpr-abntyp: capa institucional, folha de rosto,
-  citações, figuras, equações, quadros, tabelas, gráfico, referências cruzadas,
-  apêndice, anexo e referências finais.
+  Este documento apresenta um roteiro prático estruturado em padrão código-resultado
+  para todos os principais recursos do pacote ufpr-abntyp: citações, figuras, quadros,
+  tabelas, equações e referências cruzadas. Cada seção mostra o código seguido
+  imediatamente pelo resultado visual.
 ]
 
-// Abstract em inglês com a mesma estrutura do resumo principal.
 #resumo-en[
-  This document provides a practical guide to validate the main ufpr-abntyp
-  features: institutional cover, title page, citations, figures, equations,
-  frames, tables, chart, cross-references, appendix, annex and references.
+  This document provides a practical code-result pattern guide for the main
+  ufpr-abntyp resources: citations, figures, frames, tables, equations and
+  cross-references. Each section shows the code followed immediately by
+  visual result.
 ]
 
-// Listas pré-textuais geradas automaticamente a partir do conteúdo do documento.
 #lista-ilustracoes()
 #lista-quadros()
 #lista-tabelas()
 #lista-siglas()
 #lista-simbolos()
 
-// Sumário com hierarquia do trabalho.
 #sumario()
 
-// Início da parte textual: ativa paginação arábica para referências por página.
 #counter(page).update(1)
 #set page(numbering: "1", number-align: top + right)
 
 = Introdução
 
-Este tutorial foi organizado para funcionar como documento de referência rápida
-na configuração de trabalhos acadêmicos da #usar-sigla("UFPR").
+Este guia usa um padrão estruturado em cada seção: primeiro o código, depois
+o resultado visual. Assim você pode copiar o código e entender imediatamente
+como funciona observando o output.
 
-Segundo @silva2023, a padronização textual melhora a
-consistência editorial e a avaliação acadêmica.
+O pacote #usar-sigla("UFPR")-abntyp automatiza a aplicação de normas #usar-sigla("ABNT")
+para trabalhos acadêmicos. Todos os helpers apresentados aqui simplificam
+formatação e referências cruzadas.
 
-Neste modelo, as regras da #usar-sigla("ABNT") já são aplicadas de forma
-automática pelo preset institucional.
+= Citações
 
-= Revisão Teórica
+As citações no pacote ufpr-abntyp suportam vários formatos. Esta seção demonstra
+cada um com código seguido de resultado.
 
-Este capítulo apresenta a fundamentação teórica e exemplos de uso dos elementos
-do pacote, organizados em seções e subseções até o nível 2.1.1.1 para
-demonstrar a formatação progressiva conforme NBR 6024:2012.
+== Citação em prosa (forma "Autor, ano")
 
-== Modelo
+A função `cprosa()` insere uma citação no meio do texto com autor e ano.
 
-Nesta subseção são apresentados os modelos de elementos gráficos e suas
-variações.
+*Código:*
+```typst
+Segundo #cprosa("silva2023"), a normalização é importante.
+```
 
-=== Modelo simplificado
+*Resultado:*
 
-O modelo simplificado cobre os casos de uso mais frequentes.
+Segundo #cprosa("silva2023"), a normalização é importante.
 
-==== Modelo simplificado com figuras
+== Citação parentética (forma "Autor, ano" entre parênteses)
 
-A Figura @fig-fachada demonstra a imagem institucional.
+Use a sintaxe `@chave` para citações que aparecem entre parênteses no fim da frase.
 
+*Código:*
+```typst
+A normalização é um requisito para trabalhos acadêmicos @silva2023.
+```
+
+*Resultado:*
+
+A normalização é um requisito para trabalhos acadêmicos @silva2023.
+
+== Citação parentética com página
+
+Para incluir página na citação, adicione entre colchetes.
+
+*Código:*
+```typst
+@santos2022[, p. 45]
+```
+
+*Resultado:*
+
+Conforme a norma @santos2022[, p. 45], deve-se seguir formatação específica.
+
+== Citação longa (mais de 3 linhas) com texto direto
+
+Citações diretas longas recebem formatação especial: recuo de 4 cm, tamanho 10,
+espaçamento simples.
+
+*Código:*
+```typst
+#citacao-longa(
+  [A normalização e padronização de trabalhos acadêmicos são fundamentais
+   para a consistência editorial, permitindo que os leitores naveguem o texto
+   com clareza e precisão, estabelecendo critérios objetivos de avaliação.],
+  autor: "Silva",
+  ano: 2023,
+  pagina: 87,
+)
+```
+
+*Resultado:*
+
+#citacao-longa(
+  [A normalização e padronização de trabalhos acadêmicos são fundamentais
+    para a consistência editorial, permitindo que os leitores naveguem o texto
+    com clareza e precisão, estabelecendo critérios objetivos de avaliação.],
+  autor: "Silva",
+  ano: 2023,
+  pagina: 87,
+)
+
+== Citação longa com referência bibliográfica (.bib)
+
+Você também pode usar chave de referência bibliográfica em citações longas.
+
+*Código:*
+```typst
+#citacao-longa(
+  [A metodologia científica requer consistência e rigor na apresentação
+   dos dados, garantindo a reprodutibilidade e transparência das pesquisas
+   conduzidas em instituições acadêmicas de qualidade reconhecida.],
+  chave: "oliveira2021",
+  pagina: 92,
+)
+```
+
+*Resultado:*
+
+#citacao-longa(
+  [A metodologia científica requer consistência e rigor na apresentação
+    dos dados, garantindo a reprodutibilidade e transparência das pesquisas
+    conduzidas em instituições acadêmicas de qualidade reconhecida.],
+  chave: "oliveira2021",
+  pagina: 92,
+)
+
+= Figuras
+
+A função `figura()` insere imagens com título, fonte e referência cruzada automática.
+
+== Figura com caminho relativo
+
+*Código:*
+```typst
 #figura(
   "/src/institutions/ufpr/capaufpr.png",
-  <fig-fachada>,
-  "Fachada institucional utilizada no fundo da capa",
+  <fig-exemplo1>,
+  "Logo institucional da UFPR",
   "O autor (2026)",
 )
 
-==== Modelo detalhado
+Referência: @fig-exemplo1
+```
 
-A subseção 2.1.1.1 deve aparecer no sumário com numeração e texto em estilo
-regular, sem itálico.
-
-===== Modelo simplificadíssimo
-
-Este nível continua disponível para cenários mais profundos, mas não precisa
-aparecer no sumário desta validação.
-
-= Expressões matemáticas
-
-Existem duas formas de expressar relações matemáticas: em linha (inline) e em
-bloco.
-
-A equação mais famosa da física é dada por #usar-sigla("ABNT"):
-
-#equacao(
-  <eq-einstein>,
-  [$E = m c^2$],
-)
-
-// Referência cruzada por página da equação numerada.
-Referência ao resultado: vide @eq-einstein na #ref(<eq-einstein>, form: "page").
-
-Uma equação mais complexa pode ser descrita como:
-
-#equacao(
-  <eq-complexa>,
-  [$integral_0^infinity e^{-x^2} d x = frac(sqrt(pi), 2)$],
-)
-
-= Utilização do template
-
-Nesta seção são apresentados exemplos práticos equivalentes ao uso cotidiano do
-pacote: inserção de figura, quadro, tabela e gráfico com referências cruzadas.
-
-== Figuras
-
-A Figura @fig-figura2 é um exemplo de elemento ilustrativo de teste.
+*Resultado:*
 
 #figura(
   "/src/institutions/ufpr/capaufpr.png",
-  <fig-figura2>,
-  "Exemplo adicional de imagem institucional",
+  <fig-exemplo1>,
+  "Logo institucional da UFPR",
   "O autor (2026)",
-  nota-texto: "Esta é uma figura de teste para validação.",
-  largura: 60%,
 )
 
-// Quadro didático com moldura e fonte/nota.
-== Quadros
+Referência: @fig-exemplo1
 
-O Quadro @qua-prefixos resume convenções de identificação textual.
+== Figura com nota adicional
+
+*Código:*
+```typst
+#figura(
+  "/src/institutions/ufpr/capaufpr.png",
+  <fig-exemplo2>,
+  "Logo com nota de contexto",
+  "O autor (2026)",
+  nota-texto: "Imagem usada como fundo na capa do trabalho.",
+  largura: 50%,
+)
+```
+
+*Resultado:*
+
+#figura(
+  "/src/institutions/ufpr/capaufpr.png",
+  <fig-exemplo2>,
+  "Logo com nota de contexto",
+  "O autor (2026)",
+  nota-texto: "Imagem usada como fundo na capa do trabalho.",
+  largura: 50%,
+)
+
+= Quadros
+
+A função `quadro-simples()` formata quadros com moldura, títulos em negrito
+e fonte/nota alinhadas à esquerda.
+
+== Quadro de referência
+
+*Código:*
+```typst
+#quadro-simples(
+  (2fr, 4fr),
+  <qua-ref>,
+  "Prefixos de referência textual",
+  (
+    table.hline(stroke: 1pt),
+    [*Elemento*], [*Prefixo*],
+    table.hline(stroke: 0.6pt),
+    [Figura], [fig-...],
+    [Tabela], [tab-...],
+    [Quadro], [qua-...],
+    table.hline(stroke: 1pt),
+  ),
+  fonte-texto: "O autor (2026)",
+)
+
+Referência: @qua-ref
+```
+
+*Resultado:*
 
 #quadro-simples(
   (2fr, 4fr),
-  <qua-prefixos>,
+  <qua-ref>,
   "Prefixos de referência textual",
   (
     table.hline(stroke: 1pt),
     [*Elemento*],
-    [*Prefixo recomendado*],
+    [*Prefixo*],
     table.hline(stroke: 0.6pt),
     [Figura],
     [fig-...],
@@ -176,151 +269,549 @@ O Quadro @qua-prefixos resume convenções de identificação textual.
     [tab-...],
     [Quadro],
     [qua-...],
-    [Apêndice],
-    [app-...],
-    [Anexo],
-    [anx-...],
     table.hline(stroke: 1pt),
   ),
   fonte-texto: "O autor (2026)",
-  nota-texto: "Exemplo didático para validação.",
 )
 
-// Tabela com título, corpo e nota de rodapé textual.
-== Tabelas
+Referência: @qua-ref
 
-A Tabela @tab-validacao usa alinhamento automático à margem esquerda com texto
-justificado.
+== Quadro com nota
 
-#tabela-simples(
-  (3fr, 2fr, 3fr),
-  <tab-validacao>,
-  "Critérios de validação do pacote",
+*Código:*
+```typst
+#quadro-simples(
+  (1fr, 1fr, 1fr),
+  <qua-notas>,
+  "Status de validação",
   (
-    table.hline(stroke: 1.5pt),
-    [*Critério*],
+    table.hline(stroke: 1pt),
+    [*Componente*], [*Status*], [*Observação*],
+    table.hline(stroke: 0.6pt),
+    [Capa], [✓], [Conforme],
+    [Citações], [✓], [Todas as formas],
+    table.hline(stroke: 1pt),
+  ),
+  fonte-texto: "O autor (2026)",
+  nota-texto: "Checklist de componentes do pacote.",
+)
+```
+
+*Resultado:*
+
+#quadro-simples(
+  (1fr, 1fr, 1fr),
+  <qua-notas>,
+  "Status de validação",
+  (
+    table.hline(stroke: 1pt),
+    [*Componente*],
     [*Status*],
     [*Observação*],
+    table.hline(stroke: 0.6pt),
+    [Capa],
+    [✓],
+    [Conforme],
+    [Citações],
+    [✓],
+    [Todas as formas],
+    table.hline(stroke: 1pt),
+  ),
+  fonte-texto: "O autor (2026)",
+  nota-texto: "Checklist de componentes do pacote.",
+)
+
+= Tabelas
+A função `tabela()` agora suporta posicionamento (`left`/`center`),
+`largura` e `legenda-texto`. A seguir: três testes práticos — tabela pequena
+centralizada, tabela grande alinhada à esquerda, e tabela longa multipágina com
+repete de cabeçalho.
+
+== Tabela pequena (centralizada)
+
+*Código:*
+```typst
+#tabela(
+  (1fr, 1fr),
+  <tab-pequena>,
+  "Exemplo de tabela pequena",
+  (
+    table.hline(stroke: 1.5pt),
+    [*Item*], [*Valor*],
     table.hline(stroke: 0.75pt),
-    [Capa UFPR em fundo full-page],
-    [Conforme],
-    [Imagem institucional por padrão],
-    [Folha de rosto editável],
-    [Conforme],
-    [Texto de apresentação definido no arquivo],
-    [Citações ABNT],
-    [Conforme],
-    [Exemplos de curta, longa e indireta],
-    [Elementos pós-textuais],
-    [Conforme],
-    [Apêndice e anexo com letras],
+    [A], [1],
+    [B], [2],
     table.hline(stroke: 1.5pt),
   ),
   fonte-texto: "O autor (2026)",
-  nota-texto: "Status de referência para testes manuais.",
+  largura: 40%,
+  posicionamento: "center",
+  legenda-texto: "Tabela pequena centralizada",
+)
+```
+
+*Resultado:*
+
+#tabela(
+  (1fr, 1fr),
+  <tab-pequena>,
+  "Exemplo de tabela pequena",
+  (
+    table.hline(stroke: 1.5pt),
+    [*Item*],
+    [*Valor*],
+    table.hline(stroke: 0.75pt),
+    [A],
+    [1],
+    [B],
+    [2],
+    table.hline(stroke: 1.5pt),
+  ),
+  fonte-texto: "O autor (2026)",
+  largura: 40%,
+  posicionamento: "center",
+  legenda-texto: "Tabela pequena centralizada",
 )
 
-// Gráfico em bloco para validar legenda, fonte e referência cruzada.
-== Gráfico
+== Tabela grande (alinhada à esquerda)
 
-A Figura @fig-grafico mostra um gráfico simples para validar título, fonte,
-nota e referência cruzada.
+*Código:*
+```typst
+#tabela(
+  (3fr, 2fr, 3fr),
+  <tab-grande>,
+  "Tabela de demonstração grande",
+  (
+    table.hline(stroke: 1.5pt),
+    [*Coluna A*], [*Coluna B*], [*Coluna C*],
+    table.hline(stroke: 0.75pt),
+    [Linha 1A], [1B], [1C],
+    [Linha 2A], [2B], [2C],
+    [Linha 3A], [3B], [3C],
+    table.hline(stroke: 1.5pt),
+  ),
+  fonte-texto: "O autor (2026)",
+  largura: 100%,
+  posicionamento: "left",
+)
+```
 
-#grafico-simples(
-  <fig-grafico>,
-  "Distribuição simulada de resultados de validação",
-  [
-    #box(width: 18cm, height: 8cm, stroke: 0.5pt, inset: 0.4cm)[
-      #set text(size: 9pt)
-      #v(0.2cm)
-      #align(left)[
-        #box(width: 2cm, height: 0.6cm, fill: rgb("7AA6FF"))[]
-        #h(0.5cm)
-        Resultado A
-      ]
-      #v(0.3cm)
-      #align(left)[
-        #box(width: 3.5cm, height: 0.6cm, fill: rgb("4C87FF"))[]
-        #h(0.5cm)
-        Resultado B
-      ]
-      #v(0.3cm)
-      #align(left)[
-        #box(width: 5cm, height: 0.6cm, fill: rgb("1E5EFF"))[]
-        #h(0.5cm)
-        Resultado C
-      ]
-      #v(0.3cm)
-      #align(left)[
-        #box(width: 6.5cm, height: 0.6cm, fill: rgb("173D8F"))[]
-        #h(0.5cm)
-        Resultado D
-      ]
-    ]
-  ],
-  "O autor (2026).",
-  nota-texto: "Escala visual apenas demonstrativa.",
+*Resultado:*
+
+#tabela(
+  (3fr, 2fr, 3fr),
+  <tab-grande>,
+  "Tabela de demonstração grande",
+  (
+    table.hline(stroke: 1.5pt),
+    [*Coluna A*],
+    [*Coluna B*],
+    [*Coluna C*],
+    table.hline(stroke: 0.75pt),
+    [Linha 1A],
+    [1B],
+    [1C],
+    [Linha 2A],
+    [2B],
+    [2C],
+    [Linha 3A],
+    [3B],
+    [3C],
+    table.hline(stroke: 1.5pt),
+  ),
+  fonte-texto: "O autor (2026)",
+  largura: 100%,
+  posicionamento: "left",
 )
 
-= Referências cruzadas no texto
+== Tabela longa (multipágina com cabeçalho repetido)
 
-Exemplos de referência usados neste documento:
+*Código:*
+```typst
+#tabela(
+  (2fr, 1fr, 2fr),
+  <tab-multipag>,
+  "Tabela longa de exemplo",
+  (
+    table.hline(stroke: 1pt),
+    // 80 linhas de dados para testar quebra de página e repetição de cabeçalho
+    [Registro 1], [100], [Obs 1],
+    [Registro 2], [101], [Obs 2],
+    // ... (continua até 80)
+    [Registro 80], [179], [Obs 80],
+    table.hline(stroke: 1pt),
+  ),
+  head: (
+    [*Registro*], [*Valor*], [*Observação*],
+    table.hline(stroke: 0.75pt),
+  ),
+  fonte-texto: "IBGE (1993)",
+  largura: 100%,
+  posicionamento: "left",
+)
+```
 
-- Figura institucional: @fig-fachada.
-- Figura adicional: @fig-figura2.
-- Quadro de prefixos: @qua-prefixos.
-- Tabela de critérios: @tab-validacao.
-- Gráfico de resultados: @fig-grafico.
-- Equação de Einstein: @eq-einstein.
-- Equação complexa: @eq-complexa.
+#tabela(
+  (2fr, 1fr, 2fr),
+  <tab-multipag>,
+  "Tabela longa de exemplo",
+  (
+    [Registro 1],
+    [100],
+    [Obs 1],
+    [Registro 2],
+    [101],
+    [Obs 2],
+    [Registro 3],
+    [102],
+    [Obs 3],
+    [Registro 4],
+    [103],
+    [Obs 4],
+    [Registro 5],
+    [104],
+    [Obs 5],
+    [Registro 6],
+    [105],
+    [Obs 6],
+    [Registro 7],
+    [106],
+    [Obs 7],
+    [Registro 8],
+    [107],
+    [Obs 8],
+    [Registro 9],
+    [108],
+    [Obs 9],
+    [Registro 10],
+    [109],
+    [Obs 10],
+    [Registro 11],
+    [110],
+    [Obs 11],
+    [Registro 12],
+    [111],
+    [Obs 12],
+    [Registro 13],
+    [112],
+    [Obs 13],
+    [Registro 14],
+    [113],
+    [Obs 14],
+    [Registro 15],
+    [114],
+    [Obs 15],
+    [Registro 16],
+    [115],
+    [Obs 16],
+    [Registro 17],
+    [116],
+    [Obs 17],
+    [Registro 18],
+    [117],
+    [Obs 18],
+    [Registro 19],
+    [118],
+    [Obs 19],
+    [Registro 20],
+    [119],
+    [Obs 20],
+    [Registro 21],
+    [120],
+    [Obs 21],
+    [Registro 22],
+    [121],
+    [Obs 22],
+    [Registro 23],
+    [122],
+    [Obs 23],
+    [Registro 24],
+    [123],
+    [Obs 24],
+    [Registro 25],
+    [124],
+    [Obs 25],
+    [Registro 26],
+    [125],
+    [Obs 26],
+    [Registro 27],
+    [126],
+    [Obs 27],
+    [Registro 28],
+    [127],
+    [Obs 28],
+    [Registro 29],
+    [128],
+    [Obs 29],
+    [Registro 30],
+    [129],
+    [Obs 30],
+    [Registro 31],
+    [130],
+    [Obs 31],
+    [Registro 32],
+    [131],
+    [Obs 32],
+    [Registro 33],
+    [132],
+    [Obs 33],
+    [Registro 34],
+    [133],
+    [Obs 34],
+    [Registro 35],
+    [134],
+    [Obs 35],
+    [Registro 36],
+    [135],
+    [Obs 36],
+    [Registro 37],
+    [136],
+    [Obs 37],
+    [Registro 38],
+    [137],
+    [Obs 38],
+    [Registro 39],
+    [138],
+    [Obs 39],
+    [Registro 40],
+    [139],
+    [Obs 40],
+    [Registro 41],
+    [140],
+    [Obs 41],
+    [Registro 42],
+    [141],
+    [Obs 42],
+    [Registro 43],
+    [142],
+    [Obs 43],
+    [Registro 44],
+    [143],
+    [Obs 44],
+    [Registro 45],
+    [144],
+    [Obs 45],
+    [Registro 46],
+    [145],
+    [Obs 46],
+    [Registro 47],
+    [146],
+    [Obs 47],
+    [Registro 48],
+    [147],
+    [Obs 48],
+    [Registro 49],
+    [148],
+    [Obs 49],
+    [Registro 50],
+    [149],
+    [Obs 50],
+    [Registro 51],
+    [150],
+    [Obs 51],
+    [Registro 52],
+    [151],
+    [Obs 52],
+    [Registro 53],
+    [152],
+    [Obs 53],
+    [Registro 54],
+    [153],
+    [Obs 54],
+    [Registro 55],
+    [154],
+    [Obs 55],
+    [Registro 56],
+    [155],
+    [Obs 56],
+    [Registro 57],
+    [156],
+    [Obs 57],
+    [Registro 58],
+    [157],
+    [Obs 58],
+    [Registro 59],
+    [158],
+    [Obs 59],
+    [Registro 60],
+    [159],
+    [Obs 60],
+    [Registro 61],
+    [160],
+    [Obs 61],
+    [Registro 62],
+    [161],
+    [Obs 62],
+    [Registro 63],
+    [162],
+    [Obs 63],
+    [Registro 64],
+    [163],
+    [Obs 64],
+    [Registro 65],
+    [164],
+    [Obs 65],
+    [Registro 66],
+    [165],
+    [Obs 66],
+    [Registro 67],
+    [166],
+    [Obs 67],
+    [Registro 68],
+    [167],
+    [Obs 68],
+    [Registro 69],
+    [168],
+    [Obs 69],
+    [Registro 70],
+    [169],
+    [Obs 70],
+    [Registro 71],
+    [170],
+    [Obs 71],
+    [Registro 72],
+    [171],
+    [Obs 72],
+    [Registro 73],
+    [172],
+    [Obs 73],
+    [Registro 74],
+    [173],
+    [Obs 74],
+    [Registro 75],
+    [174],
+    [Obs 75],
+    [Registro 76],
+    [175],
+    [Obs 76],
+    [Registro 77],
+    [176],
+    [Obs 77],
+    [Registro 78],
+    [177],
+    [Obs 78],
+    [Registro 79],
+    [178],
+    [Obs 79],
+    [Registro 80],
+    [179],
+    [Obs 80],
+    table.hline(stroke: 1pt),
+  ),
+  head: (
+    [*Registro*],
+    [*Valor*],
+    [*Observação*],
+    table.hline(stroke: 0.75pt),
+  ),
+  fonte-texto: "IBGE (1993)",
+  largura: 100%,
+  posicionamento: "left",
+)
 
-= Discussão
+= Equações
 
-A estrutura acima cobre os pontos de uso mais recorrentes no fluxo acadêmico:
-composição dos elementos pré-textuais, demonstração de conteúdo textual com
-hierarquia profunda de seções (até 2.1.1.1), exemplos de equações matemáticas,
-e organização pós-textual.
+A função `equacao()` numera equações automaticamente e permite referência cruzada.
 
-As funções helpers (`figura`, `tabela-simples`, `quadro-simples`, `equacao`)
-simplificam o uso do pacote, eliminando necessidade de ajustes manuais de
-formatação.
+== Equação em bloco
 
-Este cenário segue as boas práticas discutidas por @santos2022 e
-@oliveira2021.
+*Código:*
+```typst
+A famosa fórmula de Einstein é:
+
+#equacao(
+  <eq-einstein>,
+  [$E = m c^2$],
+)
+
+Referência: @eq-einstein na página #ref(<eq-einstein>, form: "page").
+```
+
+*Resultado:*
+
+A famosa fórmula de Einstein é:
+
+#equacao(
+  <eq-einstein>,
+  [$E = m c^2$],
+)
+
+Referência: @eq-einstein na página #ref(<eq-einstein>, form: "page").
+
+== Equação complexa
+
+*Código:*
+```typst
+A integral gaussiana é:
+
+#equacao(
+  <eq-gauss>,
+  [$integral_{-infinity}^{infinity} e^{-x^2} d x = sqrt(pi)$],
+)
+```
+
+*Resultado:*
+
+A integral gaussiana é:
+
+#equacao(
+  <eq-gauss>,
+  [$integral_{-infinity}^{infinity} e^{-x^2} d x = sqrt(pi)$],
+)
+
+= Referências cruzadas
+
+O Typst permite referenciar qualquer elemento etiquetado com `<label>`.
+
+== Usando referências
+
+*Código:*
+```typst
+Veja a Figura <fig-exemplo1>, o Quadro <qua-ref> e a Tabela <tab-grande>.
+
+Referência por página: página #ref(<eq-einstein>, form: "page").
+```
+
+*Resultado:*
+
+Veja a Figura, o Quadro e a Tabela.
+
+Referência por página: #ref(<eq-einstein>, form: "page").
 
 = Conclusão
 
-A execução deste tutorial confirma o uso do pacote em um cenário completo e
-permite comparar rapidamente o resultado com o padrão esperado pela #usar-sigla("UFPR").
+Este template demonstra todos os recursos principais do pacote ufpr-abntyp
+seguindo o padrão código-resultado. Copie o código de cada seção e adapte
+para seu trabalho.
 
-// Apêndice A: itens de checagem rápida do template geral.
-#heading(level: 1, numbering: none, "APÊNDICE A - CHECKLIST DE VALIDAÇÃO") <app-a>
+As funções helpers automatizam:
+- Formatação de citações curtas, parentéticas e longas
+- Inserção de figuras com fonte e referência
+- Criação de tabelas e quadros com regras #usar-sigla("ABNT")
+- Numeração automática de equações
+- Referências cruzadas por página e conteúdo
 
-- verificar capa com fundo em página inteira;
-- verificar folha de rosto com texto de apresentação editável;
-- verificar citações diretas, indiretas e longa;
-- verificar figuras com novo helper;
-- verificar tabelas com novo helper e alinhamento FONTE/NOTA à esquerda;
-- verificar quadros com novo helper;
-- verificar equações numeradas;
-- verificar referências cruzadas;
-- verificar alinhamento de hierarquia até 2.1.1.1;
-- verificar elementos pós-textuais no sumário.
+#heading(level: 1, numbering: none, "APÊNDICE A - CHECKLIST RÁPIDO") <app-checklist>
 
-Referência ao Apêndice A: página #ref(<app-a>, form: "page").
+- #lorem(5) com `#cprosa()` para prosa
+- #lorem(5) com `@chave` para parentética
+- Figura inserida com `#figura()`
+- Quadro formatado com `#quadro-simples()`
+- Tabela formatada com `#tabela()`
+- Equação numerada com `#equacao()`
+- Citação longa com `#citacao-longa()`
+- Referências cruzadas validadas
 
-// Anexo A: resumo sintético dos critérios usados no template geral.
-#heading(level: 1, numbering: none, "ANEXO A - RESUMO DE CRITÉRIOS INSTITUCIONAIS") <anx-a>
+#heading(level: 1, numbering: none, "ANEXO A - SINTAXE RÁPIDA") <anx-sintaxe>
 
-- Títulos de figuras e quadros acima do elemento;
-- Fonte abaixo do elemento, alinhada à esquerda;
-- Tabelas alinhadas à esquerda com conteúdo justificado;
-- FONTE e NOTA de tabelas alinhadas à margem esquerda real;
-- Folha de rosto com bloco de apresentação editável;
-- Apêndice e anexo identificados por letras;
-- Equipações numeradas com referência cruzada;
-- Funções helpers para uso simplificado.
+*Citações:*
+- Prosa: `#cprosa("chave")`
+- Parentética: `@chave`
+- Longa direto: `#citacao-longa([texto], autor: "X", ano: Y, pagina: Z)`
+- Longa com .bib: `#citacao-longa([texto], chave: "xyz", pagina: Z)`
 
-Referência ao Anexo A: página #ref(<anx-a>, form: "page").
-
-
+*Elementos:*
+- `#figura(caminho, <label>, "título", "fonte")`
+- `#tabela(cols, <label>, "título", (corpo), fonte-texto: "...")`
+- `#quadro-simples(cols, <label>, "título", (corpo), fonte-texto: "...")`
+- `#equacao(<label>, [$math$])`

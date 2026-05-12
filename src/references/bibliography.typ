@@ -8,12 +8,13 @@
 ///
 /// Parâmetros:
 /// - arquivo: caminho para arquivo .bib ou .yaml com as referências
+///   (relativo ao diretório onde está a raiz do projeto, não a este arquivo)
 /// - titulo: título da seção (padrão: "REFERÊNCIAS")
 /// - completa: se true, mostra todas as entradas; se false, apenas as citadas
 ///
 /// Exemplo:
 /// ```typst
-/// #abnt-bibliography("referencias.bib")
+/// #abnt-bibliography("test.bib")
 /// ```
 ///
 /// Limitações conhecidas:
@@ -49,8 +50,23 @@
   )
 
   // Usa o CSL ABNT incluído no pacote
-  // O caminho é relativo a este arquivo
-  bibliography(arquivo, style: "abnt.csl", title: none, full: completa)
+  // Arquivo CSL no mesmo diretório, acessível via path relativo
+  let csl-path = "abnt.csl"
+
+  // Ajusta o caminho do arquivo .bib para funcionar de qualquer localização
+  // Se o arquivo foi compilado da raiz, adiciona ../ para subir até src/references/
+  let arquivo-ajustado = if arquivo.ends-with(".bib") or arquivo.ends-with(".yaml") {
+    // Se for caminho relativo simples (ex: "test.bib"), assume que é da raiz
+    if not arquivo.starts-with("../") and not arquivo.starts-with("src/") {
+      "../../" + arquivo
+    } else {
+      arquivo
+    }
+  } else {
+    arquivo
+  }
+
+  bibliography(arquivo-ajustado, style: csl-path, title: none, full: completa)
 }
 
 /// Configura citações para formato ABNT

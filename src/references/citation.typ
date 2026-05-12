@@ -39,6 +39,12 @@
   [#autor (#ano)]
 }
 
+/// Citação em prosa baseada em chave bibliográfica.
+/// Produz saída no fluxo do texto, como "Silva (2024)".
+#let citar-prosa(chave) = {
+  [#cite(label(chave), form: "prose")]
+}
+
 /// Citação indireta (parafraseada)
 /// Apenas menciona o autor e ano
 #let citar-indireto(autor, ano) = {
@@ -103,7 +109,10 @@
     first-line-indent: 0pt,
   )
 
-  if autor != none { upper(autor); [. ] }
+  if autor != none {
+    upper(autor)
+    [. ]
+  }
   if titulo != none { strong(titulo) }
   if subtitulo != none { [: #subtitulo] }
   [. ]
@@ -130,7 +139,10 @@
     first-line-indent: 0pt,
   )
 
-  if autor != none { upper(autor); [. ] }
+  if autor != none {
+    upper(autor)
+    [. ]
+  }
   if titulo != none { [#titulo. ] }
   if revista != none { strong(revista) }
   if local != none { [, #local] }
@@ -155,8 +167,14 @@
     first-line-indent: 0pt,
   )
 
-  if autor != none { upper(autor); [. ] }
-  if titulo != none { strong(titulo); [. ] }
+  if autor != none {
+    upper(autor)
+    [. ]
+  }
+  if titulo != none {
+    strong(titulo)
+    [. ]
+  }
   if site != none { [#site, ] }
   if ano != none { ano }
   [. ]
@@ -164,8 +182,57 @@
   if data-acesso != none { [Acesso em: #data-acesso.] }
 }
 
+/// Citação longa (mais de 3 linhas) conforme NBR 8.3.1.2
+/// Pode ser usada de duas formas:
+/// 1. Com texto direto: #citacao-longa([texto...], autor: "Silva", ano: 2023, pagina: 45)
+/// 2. Com chave .bib: #citacao-longa([texto...], chave: "silva2023", pagina: 45)
+///
+/// Características:
+/// - Parágrafo distinto (separado por linhas em branco)
+/// - Recuo de 4 cm da margem esquerda
+/// - Sem aspas
+/// - Tamanho 10 e espaçamento simples
+/// - Página obrigatória
+/// - Ponto final após citação e após autoria
+#let citacao-longa(
+  texto,
+  autor: none,
+  ano: none,
+  chave: none,
+  pagina: none,
+) = {
+  set text(size: 10pt)
+
+  block(
+    width: 100%,
+    inset: (left: 4cm, right: 0pt),
+  )[
+    #set par(leading: 0.6em, spacing: 0pt)
+    #texto
+  ]
+
+  let autoria = if chave != none {
+    [#cite(label(chave))]
+  } else if autor != none and ano != none {
+    [#upper(autor), #ano]
+  } else {
+    []
+  }
+
+  let pag-text = if pagina != none {
+    [, p. #pagina.]
+  } else {
+    [.]
+  }
+
+  align(left)[
+    #h(4cm) – #autoria#pag-text
+  ]
+}
+
 // Aliases curtos
 #let cautor = citar-autor
+#let cprosa = citar-prosa
 #let cindireto = citar-indireto
 #let capud = citar-apud
 #let cmultiplos = citar-multiplos
@@ -173,3 +240,4 @@
 #let centidade = citar-entidade
 #let ctitulo = citar-titulo
 #let ref-titulo = referencias-titulo
+#let clonga = citacao-longa

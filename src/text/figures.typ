@@ -23,12 +23,6 @@
 /// - `"tabela"` → "Tabela"
 /// - `"quadro"` → "Quadro"
 ///
-/// Uso:
-/// ```typst
-/// #container(legenda: "Meu título", origem: "O autor")[
-///   #imagem("foto.png")
-/// ]
-/// ```
 #let container(
   body,
   legenda: none,
@@ -39,9 +33,6 @@
   ..args,
 ) = {
   // Traduz strings em português para os tipos nativos do Typst.
-  // Backward-compat: aceita também os tipos nativos `image` e `table`
-  // (usados antes da renomeação para "imagem"/"tabela"), de modo que
-  // código existente com `tipo: image` ou `tipo: table` continue funcionando.
   let resolved-kind = if tipo == "imagem" or tipo == image { image } else if tipo == "tabela" or tipo == table {
     table
   } else { tipo }
@@ -54,11 +45,18 @@
 
   set align(alinhamento)
 
+  // Construímos a legenda completa para evitar quebra entre "TABELA N –" e o título.
+  let caption_full = if legenda != none {
+    [#text(size: 10pt)[#upper(supp) + " – " + #upper(legenda)]]
+  } else {
+    [#text(size: 10pt)[#upper(supp)]]
+  }
+
   figure(
     body,
-    caption: if legenda != none { upper(legenda) },
+    caption: caption_full,
     kind: resolved-kind,
-    supplement: upper(supp),
+    supplement: none,
     ..args,
   )
 
@@ -96,6 +94,21 @@
 ///   #imagem("logo.png", largura: 80%)
 /// ]
 /// ```
+#let resolver-caminho-imagem(caminho) = {
+  if type(caminho) != str {
+    caminho
+  } else if (
+    caminho.starts-with("/")
+      or caminho.starts-with("http://")
+      or caminho.starts-with("https://")
+      or caminho.starts-with("file:")
+  ) {
+    caminho
+  } else {
+    "/" + caminho
+  }
+}
+
 #let imagem(
   caminho,
   largura: auto,
@@ -112,10 +125,11 @@
   let resolved-fit = if ajuste == "cobrir" { "cover" } else if ajuste == "conter" { "contain" } else if (
     ajuste == "esticar"
   ) { "stretch" } else { ajuste }
+  let resolved-source = resolver-caminho-imagem(caminho)
 
   if pagina == auto {
     image(
-      caminho,
+      resolved-source,
       width: largura,
       height: altura,
       fit: resolved-fit,
@@ -127,7 +141,7 @@
     )
   } else {
     image(
-      caminho,
+      resolved-source,
       width: largura,
       height: altura,
       fit: resolved-fit,
@@ -139,22 +153,6 @@
       ..outros,
     )
   }
-}
-
-/// Quadro: tabela textual com bordas fechadas (conforme IBGE).
-/// Aceita os mesmos parâmetros de `table()`.
-///
-/// Uso (dentro de um `container`):
-/// ```typst
-/// #container(legenda: "Glossário", tipo: "quadro", origem: "O autor")[
-///   #quadro(columns: 2,
-///     [*Termo*], [*Definição*],
-///     [Algoritmo], [Sequência finita de instruções],
-///   )
-/// ]
-/// ```
-#let quadro(..args) = {
-  table(..args)
 }
 
 /// Fonte da figura (para usar avulso abaixo de um elemento)
@@ -193,72 +191,6 @@
     #fonte(fonte-texto, alinhamento: center)
     #if nota-texto != none [
       #nota-figura(nota-texto, alinhamento: center)
-    ]
-  ]
-}
-
-/// Função simplificada para inserir tabela com referência cruzada.
-/// Uso: #tabela-simples(columns: 3, <tab-exemplo>, "Título", [...], "Fonte (2026)")
-#let tabela-simples(
-  columns,
-  rotulo,
-  titulo,
-  corpo-tabela,
-  fonte-texto: none,
-  nota-texto: none,
-) = {
-  [
-    #figure(caption: [#upper(titulo)], kind: table, supplement: "TABELA")[
-      #text(size: 10pt)[
-        #table(columns: columns, ..corpo-tabela)
-      ]
-    ] #rotulo
-    #if fonte-texto != none [
-      #set par(first-line-indent: 0pt)
-      #align(left)[
-        #set par(justify: true)
-        #text(size: 10pt)[FONTE: #fonte-texto]
-      ]
-    ]
-    #if nota-texto != none [
-      #set par(first-line-indent: 0pt)
-      #align(left)[
-        #set par(justify: true)
-        #text(size: 10pt)[NOTA: #nota-texto]
-      ]
-    ]
-  ]
-}
-
-/// Função simplificada para inserir quadro com referência cruzada.
-/// Uso: #quadro-simples(columns: 2, <qua-exemplo>, "Título", [...], "Fonte (2026)")
-#let quadro-simples(
-  columns,
-  rotulo,
-  titulo,
-  corpo-quadro,
-  fonte-texto: none,
-  nota-texto: none,
-) = {
-  [
-    #figure(caption: [#upper(titulo)], kind: "quadro", supplement: "QUADRO")[
-      #text(size: 10pt)[
-        #quadro(columns: columns, stroke: 0.6pt, ..corpo-quadro)
-      ]
-    ] #rotulo
-    #if fonte-texto != none [
-      #set par(first-line-indent: 0pt)
-      #align(center)[
-        #set par(justify: true)
-        #text(size: 10pt)[FONTE: #fonte-texto]
-      ]
-    ]
-    #if nota-texto != none [
-      #set par(first-line-indent: 0pt)
-      #align(center)[
-        #set par(justify: true)
-        #text(size: 10pt)[NOTA: #nota-texto]
-      ]
     ]
   ]
 }
